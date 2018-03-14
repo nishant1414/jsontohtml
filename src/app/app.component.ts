@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ConvertService } from './convert.service';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  dataObs: Observable<any[]>;
+  data: any[];
+  constructor(private service:ConvertService)
+  {
+    this.dataObs=service.getReport();
+    console.log("AppComponent" + this.data);
+    this.dataObs.subscribe(d=>{
+      this.data = d;
+
+  
+    })
+
+    
+  }
+
 }
